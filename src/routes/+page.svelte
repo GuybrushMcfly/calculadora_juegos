@@ -85,7 +85,7 @@
 <main class="shell">
   <section class="hero">
     <div>
-      <h1>¿Cuánto gasto en juegos?</h1>
+      <h1>&iquest;Cu&aacute;nto gasto en juegos?</h1>
     </div>
   </section>
 
@@ -168,11 +168,11 @@
       <div class="input-grid purchase-grid">
         <label>
           <span>Productos</span>
-          <input type="number" min="0" step="0.01" bind:value={products} />
+          <input type="number" min="0.01" step="0.01" required bind:value={products} />
         </label>
         <label>
           <span>Envio</span>
-          <input type="number" min="0" step="0.01" bind:value={shipping} />
+          <input type="number" min="0" step="0.01" required bind:value={shipping} />
         </label>
         <div class="free-shipping">
           <span>Envio gratis</span>
@@ -207,7 +207,7 @@
         <span class="step">{regimen === 'puerta-puerta' ? '5' : '4'}</span>
         <div>
           <h2>Dolar</h2>
-          <p>Sin valor manual: elegis la cotizacion.</p>
+
         </div>
       </div>
 
