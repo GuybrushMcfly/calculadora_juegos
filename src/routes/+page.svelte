@@ -21,8 +21,8 @@
 
   let regimen: Regimen = $state('courier');
   let selectedStoreId = $state<StoreType['id']>('amazon');
-  let products = $state(120);
-  let shipping = $state(35);
+  let products = $state<number | null>(null);
+  let shipping = $state<number | null>(null);
   let shippingIsFree = $state(false);
   let dollarKind = $state<DollarKind>('oficial');
   let postalServiceFeeARS = $state(0);
@@ -34,12 +34,13 @@
   const selectedStore = $derived(courierStores.find((store) => store.id === selectedStoreId) ?? courierStores[0]);
   const currency = $derived<Currency>(regimen === 'puerta-puerta' ? postalCurrency : selectedStore.currency);
   const handling = $derived(selectedStore.defaultHandlingUSD);
+  const hasRequiredInputs = $derived(products !== null && shipping !== null && products > 0 && shipping >= 0);
   const result = $derived(
     calculatePurchase({
       regimen,
       store: selectedStore,
-      products,
-      shipping,
+      products: products ?? 0,
+      shipping: shipping ?? 0,
       shippingIsFree,
       currency,
       dollarKind,
@@ -236,54 +237,56 @@
         {#if shippingIsFree}<span class="store-pill"><Truck size={15} /> Envio gratis</span>{/if}
       </div>
 
-      <div class="total-block">
-        <span>Total estimado</span>
-        <strong>{formatMoney(result.totalARS, 'ARS')}</strong>
-        <small>{formatMoney(result.totalUSD, 'USD')}</small>
-      </div>
+      {#if hasRequiredInputs}
+        <div class="total-block">
+          <span>Total estimado</span>
+          <strong>{formatMoney(result.totalARS, 'ARS')}</strong>
+          <small>{formatMoney(result.totalUSD, 'USD')}</small>
+        </div>
 
-      <div class="breakdown">
-        <div>
-          <span>Pagas a la tienda</span>
-          <strong>{formatMoney(result.shopTotalOriginal, currency)}</strong>
-          <small>{formatMoney(result.shopTotalUSD, 'USD')} - {formatMoney(result.shopTotalARS, 'ARS')}</small>
+        <div class="breakdown">
+          <div>
+            <span>Pagas a la tienda</span>
+            <strong>{formatMoney(result.shopTotalOriginal, currency)}</strong>
+            <small>{formatMoney(result.shopTotalUSD, 'USD')} - {formatMoney(result.shopTotalARS, 'ARS')}</small>
+          </div>
+          <div>
+            <span>FOB / productos</span>
+            <strong>{formatMoney(result.fobUSD, 'USD')}</strong>
+            <small>Limite de referencia: USD 400 FOB</small>
+          </div>
+          <div>
+            <span>Envio para base</span>
+            <strong>{formatMoney(result.taxableShippingUSD, 'USD')}</strong>
+            <small>{shippingIsFree ? 'Esta bonificado en tienda, pero cuenta para la base' : 'Se paga y tambien cuenta para la base'}</small>
+          </div>
+          <div>
+            <span>Base CIF / IVA</span>
+            <strong>{formatMoney(result.cifUSD, 'USD')}</strong>
+            <small>Productos + envio, incluso si el envio esta bonificado</small>
+          </div>
+          <div>
+            <span>IVA estimado</span>
+            <strong>{formatMoney(result.ivaUSD, 'USD')}</strong>
+            <small>{formatMoney(result.ivaUSD * result.exchangeARS, 'ARS')}</small>
+          </div>
+          <div>
+            <span>{regimen === 'puerta-puerta' ? 'Tasa Correo' : 'Gestion courier'}</span>
+            <strong>{regimen === 'puerta-puerta' ? formatMoney(postalServiceFeeARS, 'ARS') : formatMoney(result.handlingUSD, 'USD')}</strong>
+            <small>{regimen === 'puerta-puerta' ? 'La informa Correo en e-pago' : selectedStore.prepaidImportFees ? 'No se suma en Amazon' : 'Valor sugerido por tienda, configurable luego'}</small>
+          </div>
+          <div>
+            <span>Pagas al ingresar</span>
+            <strong>{formatMoney(result.importTotalARS, 'ARS')}</strong>
+            <small>{formatMoney(result.importTotalUSD, 'USD')}</small>
+          </div>
         </div>
-        <div>
-          <span>FOB / productos</span>
-          <strong>{formatMoney(result.fobUSD, 'USD')}</strong>
-          <small>Limite de referencia: USD 400 FOB</small>
-        </div>
-        <div>
-          <span>Envio para base</span>
-          <strong>{formatMoney(result.taxableShippingUSD, 'USD')}</strong>
-          <small>{shippingIsFree ? 'Esta bonificado en tienda, pero cuenta para la base' : 'Se paga y tambien cuenta para la base'}</small>
-        </div>
-        <div>
-          <span>Base CIF / IVA</span>
-          <strong>{formatMoney(result.cifUSD, 'USD')}</strong>
-          <small>Productos + envio, incluso si el envio esta bonificado</small>
-        </div>
-        <div>
-          <span>IVA estimado</span>
-          <strong>{formatMoney(result.ivaUSD, 'USD')}</strong>
-          <small>{formatMoney(result.ivaUSD * result.exchangeARS, 'ARS')}</small>
-        </div>
-        <div>
-          <span>{regimen === 'puerta-puerta' ? 'Tasa Correo' : 'Gestion courier'}</span>
-          <strong>{regimen === 'puerta-puerta' ? formatMoney(postalServiceFeeARS, 'ARS') : formatMoney(result.handlingUSD, 'USD')}</strong>
-          <small>{regimen === 'puerta-puerta' ? 'La informa Correo en e-pago' : selectedStore.prepaidImportFees ? 'No se suma en Amazon' : 'Valor sugerido por tienda, configurable luego'}</small>
-        </div>
-        <div>
-          <span>Pagas al ingresar</span>
-          <strong>{formatMoney(result.importTotalARS, 'ARS')}</strong>
-          <small>{formatMoney(result.importTotalUSD, 'USD')}</small>
-        </div>
-      </div>
 
-      <div class="notice" class:success={result.appliedPrepaidMode}>
-        <ShieldCheck size={20} />
-        <p>{result.note}</p>
-      </div>
+        <div class="notice" class:success={result.appliedPrepaidMode}>
+          <ShieldCheck size={20} />
+          <p>{result.note}</p>
+        </div>
+      {/if}
 
       <div class="meta-row">
         <span>EUR/USD {formatNumber(rates.eurUsd)}</span>
