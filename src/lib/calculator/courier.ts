@@ -13,6 +13,7 @@ export function calculateCourier(input: PurchaseInput): PurchaseResult {
   const shopTotalARS = shopTotalUSD * exchangeARS;
   const fobUSD = productsUSD;
   const cifUSD = productsUSD + shippingUSD;
+  const ivaUSD = cifUSD * argentinaRules.iva;
 
   if (input.store.prepaidImportFees) {
     return {
@@ -22,7 +23,7 @@ export function calculateCourier(input: PurchaseInput): PurchaseResult {
       fobUSD,
       cifUSD,
       taxableShippingUSD: shippingUSD,
-      ivaUSD: 0,
+      ivaUSD,
       handlingUSD: 0,
       importTotalUSD: 0,
       importTotalARS: 0,
@@ -34,7 +35,6 @@ export function calculateCourier(input: PurchaseInput): PurchaseResult {
     };
   }
 
-  const ivaUSD = cifUSD * argentinaRules.iva;
   const handlingUSD = input.courierHandlingUSD;
   const importTotalUSD = ivaUSD + handlingUSD;
   const totalUSD = shopTotalUSD + importTotalUSD;
