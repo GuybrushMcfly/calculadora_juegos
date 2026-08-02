@@ -3,7 +3,6 @@
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   background: #07090d;
   color: #eef3f8;
-  --bg: #07090d;
   --panel: #10151d;
   --panel-2: #151b24;
   --panel-3: #1b2330;
@@ -16,9 +15,7 @@
   --radius: 8px;
 }
 
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 body {
   min-width: 320px;
@@ -27,14 +24,8 @@ body {
   color: var(--text);
 }
 
-button,
-input {
-  font: inherit;
-}
-
-button {
-  color: inherit;
-}
+button, input { font: inherit; }
+button { color: inherit; }
 
 .shell {
   width: min(1160px, 100%);
@@ -44,101 +35,18 @@ button {
 
 .hero {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  gap: 20px;
+  min-height: 150px;
   align-items: end;
-  min-height: 190px;
-  padding: 20px 0 28px;
+  padding: 18px 0 28px;
 }
 
-.eyebrow,
-.subtitle,
-.section-title p,
-.breakdown small,
-.store-list small,
-.regimen-grid small,
-.total-block small,
-.meta-row,
-.warning {
-  color: var(--muted);
-}
-
-.eyebrow,
-.store-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.eyebrow {
-  margin: 0 0 14px;
-  font-weight: 700;
-  color: var(--accent);
-}
-
-h1,
-h2,
-p {
-  margin: 0;
-}
+h1, h2, p { margin: 0; }
 
 h1 {
   max-width: 760px;
-  font-size: clamp(2rem, 4.8vw, 4.5rem);
-  line-height: 0.95;
+  font-size: clamp(2.3rem, 4.8vw, 4.5rem);
+  line-height: 0.98;
   letter-spacing: 0;
-}
-
-.subtitle {
-  max-width: 670px;
-  margin-top: 16px;
-  font-size: 1rem;
-  line-height: 1.6;
-}
-
-.rate-card,
-.panel,
-.coming-soon,
-.notice {
-  border: 1px solid var(--line);
-  background: rgba(16, 21, 29, 0.86);
-  box-shadow: 0 20px 70px rgba(0, 0, 0, 0.25);
-}
-
-.rate-card {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  min-width: 280px;
-  padding: 14px;
-  border-radius: var(--radius);
-}
-
-.rate-card span {
-  display: block;
-  margin-bottom: 4px;
-  color: var(--muted);
-  font-size: 0.78rem;
-}
-
-.rate-card strong {
-  font-size: 1rem;
-}
-
-.icon-button {
-  display: grid;
-  width: 42px;
-  height: 42px;
-  place-items: center;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  background: var(--panel-3);
-  cursor: pointer;
-}
-
-.spin {
-  animation: spin 0.9s linear infinite;
 }
 
 .workspace {
@@ -148,15 +56,15 @@ h1 {
   align-items: start;
 }
 
-.panel {
+.panel, .coming-soon, .notice {
+  border: 1px solid var(--line);
   border-radius: var(--radius);
-  padding: 18px;
+  background: rgba(16, 21, 29, 0.86);
+  box-shadow: 0 20px 70px rgba(0, 0, 0, 0.25);
 }
 
-.result-panel {
-  position: sticky;
-  top: 18px;
-}
+.panel { padding: 18px; }
+.result-panel { position: sticky; top: 18px; }
 
 .section-title {
   display: flex;
@@ -165,18 +73,10 @@ h1 {
   margin-bottom: 14px;
 }
 
-.section-title.compact {
-  margin-top: 24px;
-}
-
-.section-title h2 {
-  font-size: 1.05rem;
-}
-
-.section-title p {
-  margin-top: 3px;
-  font-size: 0.9rem;
-}
+.section-title.compact { margin-top: 24px; }
+.section-title h2 { font-size: 1.05rem; }
+.section-title p, .breakdown small, .store-list small, .regimen-grid small, .total-block small, .meta-row, .warning { color: var(--muted); }
+.section-title p { margin-top: 3px; font-size: 0.9rem; }
 
 .step {
   display: grid;
@@ -191,84 +91,32 @@ h1 {
   background: rgba(69, 208, 166, 0.08);
 }
 
-.regimen-grid,
-.input-grid,
-
-.free-shipping button {
-  display: grid;
-  width: 100%;
-  min-height: 48px;
-  gap: 3px;
-  align-content: center;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  padding: 8px 12px;
-  background: var(--panel-2);
-  color: var(--text);
-  text-align: left;
-  cursor: pointer;
-}
-
-.free-shipping button.active {
-  border-color: rgba(69, 208, 166, 0.9);
-  background: rgba(69, 208, 166, 0.1);
-}
-
-.free-shipping strong,
-.free-shipping small {
-  display: block;
-}
-
-.free-shipping small {
-  color: var(--muted);
-  font-size: 0.78rem;
-}
-
-.postal-grid {
-  grid-template-columns: minmax(180px, 0.45fr) minmax(0, 1fr);
-  align-items: end;
-}
-
-.postal-note {
-  min-height: 48px;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  padding: 10px 12px;
-  background: rgba(255, 207, 115, 0.08);
-  color: var(--danger);
-  font-size: 0.84rem;
-  line-height: 1.35;
-}
-.dollar-grid {
+.regimen-grid, .store-list, .input-grid, .dollar-grid, .currency-grid, .postal-grid {
   display: grid;
   gap: 10px;
 }
 
-.regimen-grid {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-}
+.regimen-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.input-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.dollar-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.currency-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); margin-bottom: 10px; }
+.postal-grid { grid-template-columns: minmax(180px, 0.45fr) minmax(0, 1fr); align-items: end; }
 
-.regimen-grid button,
-.store-list button,
-.dollar-grid button {
+.regimen-grid button, .store-list button, .dollar-grid button, .currency-grid button, .binary-buttons button {
   border: 1px solid var(--line);
   border-radius: var(--radius);
   background: var(--panel-2);
+  color: var(--text);
   cursor: pointer;
-  transition: border-color 0.18s ease, background 0.18s ease, transform 0.18s ease;
+  transition: border-color 0.18s ease, background 0.18s ease;
 }
 
-.regimen-grid button:hover,
-.store-list button:hover,
-.dollar-grid button:hover,
-.icon-button:hover {
+.regimen-grid button:hover, .store-list button:hover, .dollar-grid button:hover, .currency-grid button:hover, .binary-buttons button:hover {
   border-color: #3d5065;
   background: #1a2430;
 }
 
-.regimen-grid button.active,
-.store-list button.active,
-.dollar-grid button.active {
+.regimen-grid button.active, .store-list button.active, .dollar-grid button.active, .currency-grid button.active, .binary-buttons button.active {
   border-color: rgba(69, 208, 166, 0.9);
   background: rgba(69, 208, 166, 0.1);
 }
@@ -276,7 +124,7 @@ h1 {
 .regimen-grid button {
   position: relative;
   display: grid;
-  min-height: 128px;
+  min-height: 118px;
   gap: 8px;
   justify-items: start;
   padding: 16px;
@@ -290,15 +138,7 @@ h1 {
   color: var(--accent);
 }
 
-.regimen-grid span,
-.dollar-grid span {
-  font-weight: 800;
-}
-
-.store-list {
-  display: grid;
-  gap: 10px;
-}
+.regimen-grid span, .dollar-grid span { font-weight: 800; }
 
 .store-list button {
   display: grid;
@@ -320,35 +160,22 @@ h1 {
   color: var(--accent-2);
 }
 
-.store-list strong,
-.store-list small {
-  display: block;
-}
+.store-list strong, .store-list small { display: block; }
+.store-list small { margin-top: 4px; }
 
-.store-list small {
-  margin-top: 4px;
-}
-
-.coming-soon,
-.notice {
+.coming-soon, .notice {
   display: flex;
   gap: 12px;
   padding: 14px;
-  border-radius: var(--radius);
 }
 
-.coming-soon p,
-.notice p {
+.coming-soon p, .notice p {
   margin-top: 4px;
   color: var(--muted);
   line-height: 1.45;
 }
 
-.input-grid {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-}
-
-label span {
+label span, .free-shipping > span {
   display: block;
   margin-bottom: 7px;
   color: var(--muted);
@@ -371,41 +198,29 @@ input:focus {
   box-shadow: 0 0 0 3px rgba(69, 208, 166, 0.12);
 }
 
-
-.free-shipping button {
+.binary-buttons {
   display: grid;
-  width: 100%;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.binary-buttons button, .currency-grid button {
   min-height: 48px;
-  gap: 3px;
+  font-weight: 800;
+}
+
+.binary-buttons button.active, .currency-grid button.active { color: var(--accent); }
+
+.dollar-grid button {
+  display: grid;
+  gap: 5px;
+  min-height: 72px;
   align-content: center;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  padding: 8px 12px;
-  background: var(--panel-2);
-  color: var(--text);
+  padding: 10px;
   text-align: left;
-  cursor: pointer;
 }
 
-.free-shipping button.active {
-  border-color: rgba(69, 208, 166, 0.9);
-  background: rgba(69, 208, 166, 0.1);
-}
-
-.free-shipping strong,
-.free-shipping small {
-  display: block;
-}
-
-.free-shipping small {
-  color: var(--muted);
-  font-size: 0.78rem;
-}
-
-.postal-grid {
-  grid-template-columns: minmax(180px, 0.45fr) minmax(0, 1fr);
-  align-items: end;
-}
+.dollar-grid strong { font-size: 0.95rem; }
 
 .postal-note {
   min-height: 48px;
@@ -417,36 +232,19 @@ input:focus {
   font-size: 0.84rem;
   line-height: 1.35;
 }
-.dollar-grid {
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-}
 
-.dollar-grid button {
-  display: grid;
-  gap: 5px;
-  min-height: 72px;
-  align-content: center;
-  padding: 10px;
-  text-align: left;
-}
+.warning { margin-top: 12px; color: var(--danger); }
 
-.dollar-grid strong {
-  font-size: 0.95rem;
-}
-
-.warning {
-  margin-top: 12px;
-  color: var(--danger);
-}
-
-.result-top,
-.meta-row {
+.result-top, .meta-row {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
 }
 
 .store-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   border: 1px solid var(--line);
   border-radius: var(--radius);
   padding: 7px 9px;
@@ -463,11 +261,7 @@ input:focus {
   border: 1px solid rgba(69, 208, 166, 0.25);
 }
 
-.total-block span,
-.total-block small {
-  display: block;
-}
-
+.total-block span, .total-block small { display: block; }
 .total-block strong {
   display: block;
   margin: 6px 0 4px;
@@ -475,10 +269,7 @@ input:focus {
   line-height: 1;
 }
 
-.breakdown {
-  display: grid;
-  gap: 10px;
-}
+.breakdown { display: grid; gap: 10px; }
 
 .breakdown div {
   display: grid;
@@ -489,127 +280,26 @@ input:focus {
   border-bottom: 1px solid var(--line);
 }
 
-.breakdown small {
-  grid-column: 1 / -1;
-}
+.breakdown small { grid-column: 1 / -1; }
+.notice { margin-top: 18px; }
+.notice.success { border-color: rgba(69, 208, 166, 0.45); }
+.meta-row { margin-top: 14px; justify-content: space-between; font-size: 0.84rem; }
 
-.notice {
-  margin-top: 18px;
-}
-
-.notice.success {
-  border-color: rgba(69, 208, 166, 0.45);
-}
-
-.meta-row {
-  margin-top: 14px;
-  justify-content: space-between;
-  font-size: 0.84rem;
-}
-
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
+@keyframes spin { to { transform: rotate(360deg); } }
 
 @media (max-width: 900px) {
-  .shell {
-    padding: 18px;
-  }
-
-  .hero,
-  .workspace {
-    grid-template-columns: 1fr;
-  }
-
-  .hero {
-    min-height: auto;
-  }
-
-  .rate-card {
-    min-width: 0;
-  }
-
-  .result-panel {
-    position: static;
-  }
+  .shell { padding: 18px; }
+  .hero, .workspace { grid-template-columns: 1fr; }
+  .hero { min-height: auto; }
+  .result-panel { position: static; }
 }
 
 @media (max-width: 620px) {
-  .shell {
-    padding: 14px;
-  }
-
-  .hero {
-    gap: 16px;
-    padding-top: 12px;
-  }
-
-  .panel {
-    padding: 14px;
-  }
-
-  .regimen-grid,
-  .input-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .regimen-grid button {
-    min-height: 112px;
-  }
-
-  
-.free-shipping button {
-  display: grid;
-  width: 100%;
-  min-height: 48px;
-  gap: 3px;
-  align-content: center;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  padding: 8px 12px;
-  background: var(--panel-2);
-  color: var(--text);
-  text-align: left;
-  cursor: pointer;
-}
-
-.free-shipping button.active {
-  border-color: rgba(69, 208, 166, 0.9);
-  background: rgba(69, 208, 166, 0.1);
-}
-
-.free-shipping strong,
-.free-shipping small {
-  display: block;
-}
-
-.free-shipping small {
-  color: var(--muted);
-  font-size: 0.78rem;
-}
-
-.postal-grid {
-  grid-template-columns: minmax(180px, 0.45fr) minmax(0, 1fr);
-  align-items: end;
-}
-
-.postal-note {
-  min-height: 48px;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  padding: 10px 12px;
-  background: rgba(255, 207, 115, 0.08);
-  color: var(--danger);
-  font-size: 0.84rem;
-  line-height: 1.35;
-}
-.dollar-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .total-block strong {
-    font-size: 2.25rem;
-  }
+  .shell { padding: 14px; }
+  .hero { gap: 16px; padding-top: 12px; }
+  .panel { padding: 14px; }
+  .regimen-grid, .input-grid, .postal-grid { grid-template-columns: 1fr; }
+  .regimen-grid button { min-height: 112px; }
+  .dollar-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .total-block strong { font-size: 2.25rem; }
 }

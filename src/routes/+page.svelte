@@ -26,12 +26,13 @@
   let shippingIsFree = $state(false);
   let dollarKind = $state<DollarKind>('oficial');
   let postalServiceFeeARS = $state(0);
+  let postalCurrency = $state<Currency>('USD');
   let rates = $state<Rates>(fallbackRates);
   let loadingRates = $state(true);
   let rateError = $state('');
 
   const selectedStore = $derived(courierStores.find((store) => store.id === selectedStoreId) ?? courierStores[0]);
-  const currency = $derived<Currency>(regimen === 'puerta-puerta' ? 'USD' : selectedStore.currency);
+  const currency = $derived<Currency>(regimen === 'puerta-puerta' ? postalCurrency : selectedStore.currency);
   const handling = $derived(selectedStore.defaultHandlingUSD);
   const result = $derived(
     calculatePurchase({
@@ -156,6 +157,14 @@
         </div>
       </div>
 
+      {#if regimen === 'puerta-puerta'}
+        <div class="currency-grid" aria-label="Moneda de la compra">
+          <button type="button" class:active={postalCurrency === 'USD'} onclick={() => (postalCurrency = 'USD')}>USD</button>
+          <button type="button" class:active={postalCurrency === 'EUR'} onclick={() => (postalCurrency = 'EUR')}>EUR</button>
+          <button type="button" class:active={postalCurrency === 'GBP'} onclick={() => (postalCurrency = 'GBP')}>GBP</button>
+        </div>
+      {/if}
+
       <div class="input-grid purchase-grid">
         <label>
           <span>Productos</span>
@@ -165,13 +174,13 @@
           <span>Envio</span>
           <input type="number" min="0" step="0.01" bind:value={shipping} />
         </label>
-        <label class="free-shipping">
-          <span>Envio bonificado</span>
-          <button type="button" class:active={shippingIsFree} onclick={() => (shippingIsFree = !shippingIsFree)}>
-            <strong>{shippingIsFree ? 'Gratis' : 'Pago'}</strong>
-            <small>{shippingIsFree ? 'No lo pagas, pero integra la base' : 'Se suma al pago de tienda'}</small>
-          </button>
-        </label>
+        <div class="free-shipping">
+          <span>Envio gratis</span>
+          <div class="binary-buttons" aria-label="Envio gratis">
+            <button type="button" class:active={shippingIsFree} onclick={() => (shippingIsFree = true)}>Si</button>
+            <button type="button" class:active={!shippingIsFree} onclick={() => (shippingIsFree = false)}>No</button>
+          </div>
+        </div>
       </div>
 
       {#if regimen === 'puerta-puerta'}
