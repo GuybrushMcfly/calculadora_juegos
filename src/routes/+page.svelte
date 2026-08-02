@@ -85,7 +85,7 @@
 <main class="shell">
   <section class="hero">
     <div>
-      <h1>Calculadora de compra de juegos</h1>
+      <h1>¿Cuánto gasto en juegos?</h1>
     </div>
   </section>
 
@@ -95,7 +95,7 @@
         <span class="step">1</span>
         <div>
           <h2>Regimen</h2>
-          <p>Primero elegimos como entra el paquete.</p>
+
         </div>
       </div>
 
@@ -119,7 +119,7 @@
           <span class="step">2</span>
           <div>
             <h2>Tienda</h2>
-            <p>Amazon no suma extras; las otras estiman ingreso courier.</p>
+
           </div>
         </div>
 
