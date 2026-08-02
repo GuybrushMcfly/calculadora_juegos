@@ -98,6 +98,7 @@ h1 {
 
 .regimen-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .input-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.purchase-grid.amazon-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 .dollar-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 .currency-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); margin-bottom: 10px; }
 .postal-grid { grid-template-columns: minmax(180px, 0.45fr) minmax(0, 1fr); align-items: end; }
@@ -299,6 +300,7 @@ input:focus {
   .hero { gap: 16px; padding-top: 12px; }
   .panel { padding: 14px; }
   .regimen-grid, .input-grid, .postal-grid { grid-template-columns: 1fr; }
+  .purchase-grid.amazon-grid { grid-template-columns: 1fr; }
   .regimen-grid button { min-height: 112px; }
   .dollar-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .total-block strong { font-size: 2.25rem; }

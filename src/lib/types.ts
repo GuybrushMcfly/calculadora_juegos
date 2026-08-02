@@ -31,6 +31,7 @@ export type PurchaseInput = {
   dollarKind: DollarKind;
   rates: Rates;
   courierHandlingUSD: number;
+  prepaidImportFees: number;
   postalServiceFeeARS: number;
 };
 
@@ -43,6 +44,8 @@ export type PurchaseResult = {
   taxableShippingUSD: number;
   ivaUSD: number;
   handlingUSD: number;
+  prepaidImportFeesUSD: number;
+  prepaidImportFeesARS: number;
   importTotalUSD: number;
   importTotalARS: number;
   totalUSD: number;

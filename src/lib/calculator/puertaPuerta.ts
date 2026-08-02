@@ -28,6 +28,8 @@ export function calculatePuertaPuerta(input: PurchaseInput): PurchaseResult {
     taxableShippingUSD: shippingUSD,
     ivaUSD,
     handlingUSD: postalFeeUSD,
+    prepaidImportFeesUSD: 0,
+    prepaidImportFeesARS: 0,
     importTotalUSD,
     importTotalARS,
     totalUSD: totalARS / exchangeARS,

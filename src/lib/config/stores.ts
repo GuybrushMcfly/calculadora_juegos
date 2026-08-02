@@ -17,7 +17,7 @@ export const courierStores: Store[] = [
     currency: 'EUR',
     prepaidImportFees: false,
     defaultHandlingUSD: 15,
-    note: 'Pensado para envios por DHL/FedEx/UPS con cargos editables por operador.'
+    note: 'DHL Express Zona 3: envio estimado segun subtotal de productos.'
   },
   {
     id: 'magicmadhouse',
@@ -26,7 +26,7 @@ export const courierStores: Store[] = [
     currency: 'GBP',
     prepaidImportFees: false,
     defaultHandlingUSD: 15,
-    note: 'Convierte desde libras y estima ingreso por courier.'
+    note: 'Envio fijo estimado: GBP 2.07.'
   },
   {
     id: 'otro',
