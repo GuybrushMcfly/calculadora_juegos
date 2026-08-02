@@ -138,7 +138,7 @@
       <div class="section-title">
         <span class="step">1</span>
         <div>
-          <h2>Regimen</h2>
+          <h2>Régimen</h2>
 
         </div>
       </div>
@@ -188,7 +188,7 @@
           <Package size={22} />
           <div>
             <strong>Puerta a puerta por Correo Argentino.</strong>
-            <p>Usa productos + envio como base. La tasa del Correo se carga aparte cuando el portal la liquide.</p>
+            <p>Usa productos + envío como base. La tasa del Correo se carga aparte cuando el portal la liquide.</p>
           </div>
         </div>
       {/if}
@@ -197,7 +197,7 @@
         <span class="step">3</span>
         <div>
           <h2>Compra</h2>
-          <p>Productos y envio en {currency}.</p>
+          <p>Productos y envío en {currency}.</p>
         </div>
       </div>
 
@@ -215,7 +215,7 @@
           <input type="number" min="0.01" max="9999.99" step="0.01" required bind:value={products} />
         </label>
         <label>
-          <span>{isPhilibert ? 'Envio Zona 3' : isMagicMadhouse ? 'Envio fijo' : 'Envio'}</span>
+          <span>{isPhilibert ? 'Envío Zona 3' : isMagicMadhouse ? 'Envío fijo' : 'Envío'}</span>
           {#if hasAutomaticShipping}
             <input type="text" readonly value={automaticShipping === null ? 'Cotizar' : formatMoney(automaticShipping, currency)} />
           {:else}
@@ -224,9 +224,9 @@
         </label>
         {#if !hasAutomaticShipping}
           <div class="free-shipping">
-            <span>Envio gratis</span>
-            <div class="binary-buttons" aria-label="Envio gratis">
-              <button type="button" class:active={shippingIsFree} onclick={() => (shippingIsFree = true)}>Si</button>
+            <span>Envío gratis</span>
+            <div class="binary-buttons" aria-label="Envío gratis">
+              <button type="button" class:active={shippingIsFree} onclick={() => (shippingIsFree = true)}>Sí</button>
               <button type="button" class:active={!shippingIsFree} onclick={() => (shippingIsFree = false)}>No</button>
             </div>
           </div>
@@ -254,7 +254,7 @@
             <input type="number" min="0" max="9999.99" step="100" bind:value={postalServiceFeeARS} />
           </label>
           <div class="postal-note">
-            ARCA informa que Correo cobra una tasa en todos los casos, pero el monto lo genera el portal e-pago en la liquidacion.
+            ARCA informa que Correo cobra una tasa en todos los casos, pero el monto lo genera el portal e-pago en la liquidación.
           </div>
         </div>
       {/if}
@@ -262,7 +262,7 @@
       <div class="section-title compact">
         <span class="step">{regimen === 'puerta-puerta' ? '5' : '4'}</span>
         <div>
-          <h2>Dolar</h2>
+          <h2>Dólar</h2>
 
         </div>
       </div>
@@ -281,7 +281,7 @@
       </div>
 
       {#if needsPhilibertQuote}
-        <p class="warning">Philibert pide cotizacion para Zona 3 cuando la compra supera EUR 300 sin impuestos.</p>
+        <p class="warning">Philibert pide cotización para Zona 3 cuando la compra supera EUR 300 sin impuestos.</p>
       {/if}
 
       {#if rateError}
@@ -293,7 +293,7 @@
       <div class="result-top">
         <span class="store-pill"><Globe2 size={15} /> {regimen === 'puerta-puerta' ? 'Correo Argentino' : selectedStore.name}</span>
         <span class="store-pill"><Banknote size={15} /> {currency}</span>
-        {#if shippingIsFree}<span class="store-pill"><Truck size={15} /> Envio gratis</span>{/if}
+        {#if shippingIsFree}<span class="store-pill"><Truck size={15} /> Envío gratis</span>{/if}
       </div>
 
       {#if hasRequiredInputs}
@@ -305,24 +305,28 @@
 
         <div class="breakdown">
           <div>
-            <span>Pagas a la tienda</span>
+            <span>{regimen === 'puerta-puerta' ? 'Subtotal declarado' : 'Subtotal compra'}</span>
             <strong>{formatMoney(result.shopTotalOriginal, currency)}</strong>
-            <small>{formatMoney(result.shopTotalUSD, 'USD')} - {formatMoney(result.shopTotalARS, 'ARS')}</small>
+            {#if selectedStore.prepaidImportFees}
+              <small>Sin impuestos Amazon</small>
+            {:else}
+              <small>{formatMoney(result.shopTotalUSD, 'USD')} - {formatMoney(result.shopTotalARS, 'ARS')}</small>
+            {/if}
           </div>
           <div>
             <span>FOB / productos</span>
             <strong>{formatMoney(result.fobUSD, 'USD')}</strong>
-            <small>Limite de referencia: USD 400 FOB</small>
+            <small>Límite de referencia: USD 400 FOB</small>
           </div>
           <div>
-            <span>Envio para base</span>
+            <span>Envío para base</span>
             <strong>{formatMoney(result.taxableShippingUSD, 'USD')}</strong>
-            <small>{isPhilibert ? 'Tarifa DHL Express Zona 3 segun subtotal' : isMagicMadhouse ? 'Envio fijo de Magic Madhouse' : shippingIsFree ? 'Esta bonificado en tienda, pero cuenta para la base' : 'Se paga y tambien cuenta para la base'}</small>
+            <small>{isPhilibert ? 'Tarifa DHL Express Zona 3 según subtotal' : isMagicMadhouse ? 'Envío fijo de Magic Madhouse' : shippingIsFree ? 'Está bonificado en tienda, pero cuenta para la base' : 'Se paga y también cuenta para la base'}</small>
           </div>
           <div>
             <span>Base CIF / IVA</span>
             <strong>{formatMoney(result.cifUSD, 'USD')}</strong>
-            <small>Productos + envio, incluso si el envio esta bonificado</small>
+            <small>Productos + envío, incluso si el envío está bonificado</small>
           </div>
           <div>
             <span>IVA estimado</span>
@@ -337,12 +341,12 @@
             </div>
           {/if}
           <div>
-            <span>{regimen === 'puerta-puerta' ? 'Tasa Correo' : 'Gestion courier'}</span>
+            <span>{regimen === 'puerta-puerta' ? 'Tasa Correo' : 'Gestión courier'}</span>
             <strong>{regimen === 'puerta-puerta' ? formatMoney(safePostalServiceFeeARS ?? 0, 'ARS') : formatMoney(result.handlingUSD, 'USD')}</strong>
             <small>{regimen === 'puerta-puerta' ? 'La informa Correo en e-pago' : selectedStore.prepaidImportFees ? 'No se suma en Amazon' : 'Valor estimado'}</small>
           </div>
           <div>
-            <span>Pagas al ingresar</span>
+            <span>{regimen === 'puerta-puerta' ? 'Pagas al Correo Argentino' : 'Pagas al courier al ingresar al país'}</span>
             <strong>{formatMoney(result.importTotalARS, 'ARS')}</strong>
             <small>{formatMoney(result.importTotalUSD, 'USD')}</small>
           </div>

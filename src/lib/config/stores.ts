@@ -8,7 +8,7 @@ export const courierStores: Store[] = [
     currency: 'USD',
     prepaidImportFees: true,
     defaultHandlingUSD: 0,
-    note: 'Usa el total mostrado por Amazon. No suma gestion courier adicional.'
+    note: 'Usa el total mostrado por Amazon. No suma gestión courier adicional.'
   },
   {
     id: 'philibert',
@@ -17,7 +17,7 @@ export const courierStores: Store[] = [
     currency: 'EUR',
     prepaidImportFees: false,
     defaultHandlingUSD: 15,
-    note: 'DHL Express Zona 3: envio estimado segun subtotal de productos.'
+    note: 'DHL Express Zona 3: envío estimado según subtotal de productos.'
   },
   {
     id: 'magicmadhouse',
@@ -26,7 +26,7 @@ export const courierStores: Store[] = [
     currency: 'GBP',
     prepaidImportFees: false,
     defaultHandlingUSD: 15,
-    note: 'Envio fijo estimado: GBP 2.07.'
+    note: 'Envío fijo estimado: GBP 2.07.'
   },
   {
     id: 'otro',
