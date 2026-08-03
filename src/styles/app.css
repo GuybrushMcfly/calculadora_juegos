@@ -46,8 +46,8 @@ button { color: inherit; }
 h1, h2, p { margin: 0; }
 
 h1 {
-  max-width: 760px;
-  font-size: clamp(2.3rem, 4.8vw, 4.5rem);
+  max-width: 980px;
+  font-size: clamp(2.3rem, 4.4vw, 4.1rem);
   line-height: 0.98;
   letter-spacing: 0;
 }
