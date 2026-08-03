@@ -174,7 +174,17 @@
               class:active={selectedStoreId === store.id}
               onclick={() => (selectedStoreId = store.id)}
             >
-              <span class="store-icon"><Store size={19} /></span>
+              <span class="store-icon" class:logo={store.logoPath}>
+                {#if store.logoPath}
+                  <img
+                    src={store.logoPath}
+                    alt=""
+                    aria-hidden="true"
+                  />
+                {:else}
+                  <Store size={19} />
+                {/if}
+              </span>
               <span>
                 <strong>{store.name}</strong>
                 <small>{store.country} - {store.currency}</small>
@@ -365,3 +375,4 @@
     </aside>
   </div>
 </main>
+

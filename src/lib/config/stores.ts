@@ -8,6 +8,7 @@ export const courierStores: Store[] = [
     currency: 'USD',
     prepaidImportFees: true,
     defaultHandlingUSD: 0,
+    logoPath: '/logos/amazon.png',
     note: 'Usa el total mostrado por Amazon. No suma gestión courier adicional.'
   },
   {
@@ -17,6 +18,7 @@ export const courierStores: Store[] = [
     currency: 'EUR',
     prepaidImportFees: false,
     defaultHandlingUSD: 15,
+    logoPath: '/logos/philibert.png',
     note: 'DHL Express Zona 3: envío estimado según subtotal de productos.'
   },
   {
@@ -26,6 +28,7 @@ export const courierStores: Store[] = [
     currency: 'GBP',
     prepaidImportFees: false,
     defaultHandlingUSD: 15,
+    logoPath: '/logos/magicmadhouse-icon.png',
     note: 'Envío fijo estimado: GBP 2.07.'
   },
   {
@@ -38,3 +41,4 @@ export const courierStores: Store[] = [
     note: 'Para tiendas sin comportamiento preconfigurado.'
   }
 ];
+

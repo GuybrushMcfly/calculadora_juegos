@@ -11,6 +11,7 @@ export type Store = {
   prepaidImportFees: boolean;
   defaultHandlingUSD: number;
   note: string;
+  logoPath?: string;
 };
 
 export type Rates = {
@@ -54,3 +55,4 @@ export type PurchaseResult = {
   appliedPrepaidMode: boolean;
   note: string;
 };
+

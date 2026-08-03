@@ -1,6 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@600;700;800&display=swap');
+
 :root {
   color-scheme: dark;
-  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family: "Nunito Sans", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   background: #07090d;
   color: #eef3f8;
   --panel: #10151d;
@@ -13,6 +15,7 @@
   --accent-2: #67a9ff;
   --danger: #ffcf73;
   --radius: 8px;
+  --soft-shadow: 0 18px 45px rgba(0, 0, 0, 0.22);
 }
 
 * { box-sizing: border-box; }
@@ -28,7 +31,7 @@ button, input { font: inherit; }
 button { color: inherit; }
 
 .shell {
-  width: min(1160px, 100%);
+  width: min(1180px, 100%);
   margin: 0 auto;
   padding: 24px;
 }
@@ -51,8 +54,8 @@ h1 {
 
 .workspace {
   display: grid;
-  grid-template-columns: minmax(0, 1.05fr) minmax(340px, 0.7fr);
-  gap: 18px;
+  grid-template-columns: minmax(0, 1.1fr) minmax(360px, 0.62fr);
+  gap: 22px;
   align-items: start;
 }
 
@@ -60,10 +63,11 @@ h1 {
   border: 1px solid var(--line);
   border-radius: var(--radius);
   background: rgba(16, 21, 29, 0.86);
-  box-shadow: 0 20px 70px rgba(0, 0, 0, 0.25);
+  box-shadow: var(--soft-shadow);
 }
 
-.panel { padding: 18px; }
+.panel { padding: 22px; }
+.form-panel { display: grid; gap: 2px; }
 .result-panel { position: sticky; top: 18px; }
 
 .section-title {
@@ -73,27 +77,28 @@ h1 {
   margin-bottom: 14px;
 }
 
-.section-title.compact { margin-top: 24px; }
+.section-title.compact { margin-top: 28px; }
 .section-title h2 { font-size: 1.05rem; }
 .section-title p, .breakdown small, .store-list small, .regimen-grid small, .total-block small, .meta-row, .warning { color: var(--muted); }
 .section-title p { margin-top: 3px; font-size: 0.9rem; }
 
 .step {
   display: grid;
-  flex: 0 0 34px;
-  width: 34px;
-  height: 34px;
+  flex: 0 0 28px;
+  width: 28px;
+  height: 28px;
   place-items: center;
   border: 1px solid rgba(69, 208, 166, 0.45);
-  border-radius: var(--radius);
+  border-radius: 50%;
   color: var(--accent);
   font-weight: 800;
   background: rgba(69, 208, 166, 0.08);
+  font-size: 0.78rem;
 }
 
 .regimen-grid, .store-list, .input-grid, .dollar-grid, .currency-grid, .postal-grid {
   display: grid;
-  gap: 10px;
+  gap: 12px;
 }
 
 .regimen-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -109,26 +114,28 @@ h1 {
   background: var(--panel-2);
   color: var(--text);
   cursor: pointer;
-  transition: border-color 0.18s ease, background 0.18s ease;
+  transition: border-color 0.18s ease, background 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease;
 }
 
 .regimen-grid button:hover, .store-list button:hover, .dollar-grid button:hover, .currency-grid button:hover, .binary-buttons button:hover {
   border-color: #3d5065;
   background: #1a2430;
+  transform: translateY(-1px);
 }
 
 .regimen-grid button.active, .store-list button.active, .dollar-grid button.active, .currency-grid button.active, .binary-buttons button.active {
   border-color: rgba(69, 208, 166, 0.9);
   background: rgba(69, 208, 166, 0.1);
+  box-shadow: inset 0 0 0 1px rgba(69, 208, 166, 0.16), 0 10px 24px rgba(0, 0, 0, 0.14);
 }
 
 .regimen-grid button {
   position: relative;
   display: grid;
-  min-height: 118px;
+  min-height: 104px;
   gap: 8px;
   justify-items: start;
-  padding: 16px;
+  padding: 16px 44px 16px 16px;
   text-align: left;
 }
 
@@ -144,21 +151,45 @@ h1 {
 .store-list button {
   display: grid;
   grid-template-columns: auto minmax(0, 1fr) auto;
-  gap: 12px;
+  gap: 14px;
   align-items: center;
-  min-height: 66px;
-  padding: 12px;
+  min-height: 68px;
+  padding: 12px 14px;
   text-align: left;
 }
 
 .store-icon {
   display: grid;
-  width: 40px;
-  height: 40px;
+  width: 38px;
+  height: 38px;
   place-items: center;
   border-radius: var(--radius);
   background: var(--panel-3);
   color: var(--accent-2);
+  overflow: hidden;
+}
+
+.store-icon.logo {
+  border-radius: 50%;
+  background: #fff;
+}
+
+.store-icon img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.store-list button > svg:last-child {
+  opacity: 0.45;
+  transition: opacity 0.18s ease, transform 0.18s ease;
+}
+
+.store-list button:hover > svg:last-child,
+.store-list button.active > svg:last-child {
+  opacity: 0.9;
+  transform: translateX(2px);
 }
 
 .store-list strong, .store-list small { display: block; }
@@ -188,10 +219,11 @@ input {
   min-height: 48px;
   border: 1px solid var(--line);
   border-radius: var(--radius);
-  padding: 0 12px;
+  padding: 0 14px;
   background: #0b1017;
   color: var(--text);
   outline: none;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
 }
 
 input:focus {
@@ -202,7 +234,7 @@ input:focus {
 .binary-buttons {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 8px;
+  gap: 10px;
 }
 
 .binary-buttons button, .currency-grid button {
@@ -215,9 +247,9 @@ input:focus {
 .dollar-grid button {
   display: grid;
   gap: 5px;
-  min-height: 72px;
+  min-height: 78px;
   align-content: center;
-  padding: 10px;
+  padding: 12px;
   text-align: left;
 }
 
@@ -239,7 +271,7 @@ input:focus {
 .result-top, .meta-row {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 10px;
 }
 
 .store-pill {
@@ -255,11 +287,12 @@ input:focus {
 }
 
 .total-block {
-  margin: 22px 0;
-  padding: 18px;
+  margin: 24px 0 26px;
+  padding: 22px;
   border-radius: var(--radius);
   background: linear-gradient(135deg, rgba(69, 208, 166, 0.18), rgba(103, 169, 255, 0.11)), #10151d;
   border: 1px solid rgba(69, 208, 166, 0.25);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04), 0 18px 36px rgba(0, 0, 0, 0.18);
 }
 
 .total-block span, .total-block small { display: block; }
@@ -270,14 +303,14 @@ input:focus {
   line-height: 1;
 }
 
-.breakdown { display: grid; gap: 10px; }
+.breakdown { display: grid; }
 
 .breakdown div {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  gap: 4px 12px;
+  grid-template-columns: minmax(0, 1fr) max-content;
+  gap: 5px 18px;
   align-items: baseline;
-  padding: 13px 0;
+  padding: 15px 0;
   border-bottom: 1px solid var(--line);
 }
 
@@ -305,3 +338,4 @@ input:focus {
   .dollar-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .total-block strong { font-size: 2.25rem; }
 }
+
